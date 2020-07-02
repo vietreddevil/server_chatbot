@@ -44,6 +44,95 @@ router.get('/welcome/video', (req, res) => {
 });
 
 // end welcome
+//checkphone
+router.get('/checkphone/:sdt', (req, res) => {
+    var isValidPhone = checkPhone(req.params.sdt);
+    if (isValidPhone) {
+        res.send({
+            "redirect_to_blocks": ["camon"]
+        });
+    } else {
+        res.send({
+            "redirect_to_blocks": ["nhaplaisdt"]
+        });
+    }
+})
+//end checkphone
 
+//horoscope
+router.get('/horoscope/:namsinh', (req, res) => {
+    var birthYear = extractBirthYear(req.params.namsinh);
+    if (birthYear == 0) {
+        res.send({
+            "redirect_to_blocks": ["tuvi khongconamsinh"]
+        });
+    } else {
+        res.send({
+            "messages": [{
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": "Hello!",
+                        "buttons": [{
+                                "type": "show_block",
+                                "block_names": ["Image"],
+                                "title": "Show Block"
+                            },
+                            {
+                                "type": "web_url",
+                                "url": "https://rockets.chatfuel.com",
+                                "title": "Visit Website"
+                            },
+                            {
+                                "url": "https://rockets.chatfuel.com/api/welcome",
+                                "type": "json_url",
+                                "title": "Postback"
+                            }
+                        ]
+                    }
+                }
+            }]
+        });
+    }
+});
+//end horoscope
+
+//function
+//lay nam sinh ra tu input cua nguoi dung
+var extractBirthYear = _userInput => {
+    if (!hasNumber(_userInput)) {
+        return 0
+    }
+    return 1;
+}
+var hasNumber = str => {
+    return /\d/.test(str);
+}
+
+//kiem tra so dien thoai co dung dinh dang khong
+var checkPhone = (_phone) => {
+    if (_phone.includes('+')) {
+        var _temp_phone = _phone.replace('+', '');
+        if (_temp_phone.includes('+') || !/^\d+$/.test(_temp_phone)) return false;
+    } else {
+        if (!/^\d+$/.test(_phone)) return false;
+    }
+
+    if (_phone.includes('+84') || _phone.includes('84')) {
+        if (_phone.includes('+')) {
+            if (_phone.length < 12 || _phone.length > 13) return false;
+            return true;
+        } else {
+            if (_phone.length < 11 || _phone.length > 12) return false;
+            return true;
+        }
+    } else {
+        if (_phone.length < 10 || _phone.length > 11) return false;
+        return true;
+    }
+}
+
+//end function
 
 module.exports = router;
