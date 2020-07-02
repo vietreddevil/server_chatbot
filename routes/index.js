@@ -68,31 +68,7 @@ router.get('/horoscope/:namsinh', (req, res) => {
         });
     } else {
         res.send({
-            "messages": [{
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "button",
-                        "text": "Hello!",
-                        "buttons": [{
-                                "type": "show_block",
-                                "block_names": ["Image"],
-                                "title": "Show Block"
-                            },
-                            {
-                                "type": "web_url",
-                                "url": "https://rockets.chatfuel.com",
-                                "title": "Visit Website"
-                            },
-                            {
-                                "url": "https://rockets.chatfuel.com/api/welcome",
-                                "type": "json_url",
-                                "title": "Postback"
-                            }
-                        ]
-                    }
-                }
-            }]
+            "redirect_to_blocks": ["tuvi doctuvi1"]
         });
     }
 });
