@@ -152,8 +152,7 @@ router.get('/checkphone/:sdt', (req, res) => {
 rất dễ hiểu, việc gửi lại block, ảnh hay video, text thì có sẵn tài liệu trong trang https://tailieu.smax.bot/api/json-api rồi. Đọc cái là ra.
 ### Có JOB thì gọi anh <3 <3 <3 $ $ $
 
-dm thg loz hieu
-
+Truong Hieu Hacker
 
 
 
