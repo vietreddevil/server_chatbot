@@ -95,7 +95,8 @@ router.get('/get-info/get-birth', (req, res) => {
     } else {
         res.send({
             "set_attributes": {
-                "ngaysinh": arr[2]
+                "ngaysinh": arr[1],
+                "namsinh": arr[2]
             }
         });
     }
