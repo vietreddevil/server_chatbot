@@ -88,8 +88,7 @@ router.get('/get-info/get-birth', (req, res) => {
     let date = new Date(info);
     if (date == 'Invalid Date') {
         res.send({
-            "set_attributes": {
-            }
+            "redirect_to_blocks": ["RETRY_GET_DATE"]
         });
     } else {
         res.send({
