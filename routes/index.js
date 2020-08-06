@@ -71,7 +71,7 @@ router.get('/horoscope/:namsinh', async (req, res) => {
         let lists = [];
         let laso = (birthYear - 1870) % 12;
         tuvi[laso].forEach(element => {
-            lists.push({"text": element});
+            lists.push({ "text": element });
         });
         res.send({
             "message": lists
@@ -86,13 +86,17 @@ router.get('/get-info/get-birth', (req, res) => {
     console.log(arr);
     info = arr[1] + '/' + arr[0] + '/' + arr[2];
     let date = new Date(info);
-    if(date == 'Invalid Date') {
+    if (date == 'Invalid Date') {
         res.send({
-            "redirect_to_blocks": ["nhapsaingaysinh"]
+            "set_attributes": {
+                "ngaysinh": null
+            }
         });
     } else {
         res.send({
-            "redirect_to_blocks": ["nhapdungngaysinh"]
+            "set_attributes": {
+                "ngaysinh": arr[2]
+            }
         });
     }
 })
@@ -104,9 +108,9 @@ var extractBirthYear = _userInput => {
         if (!hasNumber(_userInput)) {
             resolve(0);
         } else {
-            if(_userInput >= 2) {
+            if (_userInput >= 2) {
                 _userInput = Number(_userInput.slice(-2));
-                if(_userInput >= 0 && _userInput <= 20) {
+                if (_userInput >= 0 && _userInput <= 20) {
                     _userInput += 2000;
                 } else {
                     _userInput += 1900;
@@ -139,10 +143,10 @@ var checkPhone = (_phone) => {
             if (_phone.length < 11 || _phone.length > 12) return false;
             return true;
         }
-    } else if(_phone[0] == "0") {
+    } else if (_phone[0] == "0") {
         if (_phone.length < 10 || _phone.length > 11) return false;
         return true;
-    } else{
+    } else {
         return false;
     }
 }
