@@ -89,7 +89,6 @@ router.get('/get-info/get-birth', (req, res) => {
     if (date == 'Invalid Date') {
         res.send({
             "set_attributes": {
-                "ngaysinh": null
             }
         });
     } else {
