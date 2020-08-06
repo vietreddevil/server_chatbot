@@ -82,10 +82,11 @@ router.get('/horoscope/:namsinh', async (req, res) => {
 
 router.get('/get-info/get-birth', (req, res) => {
     let info = req.url.split('info=')[1];
-    let arr = info.split('/');
-    console.log(arr);
+    let arr = info.split('%2F');
+    console.log(info);
     info = arr[1] + '/' + arr[0] + '/' + arr[2];
     let date = new Date(info);
+    console.log(date)
     if (date == 'Invalid Date') {
         res.send({
             "redirect_to_blocks": ["RETRY_GET_DATE"]
