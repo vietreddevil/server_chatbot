@@ -45,15 +45,20 @@ router.get('/welcome/video', (req, res) => {
 
 // end welcome
 //checkphone
-router.get('/checkphone/:sdt', (req, res) => {
-    var isValidPhone = checkPhone(req.params.sdt);
-    if (isValidPhone) {
+router.get('/checkphone', (req, res) => {
+    let info = req.url.split('info=')[1];
+    console.log(info)
+    var isValidPhone = checkPhone(info);
+    console.log(isValidPhone);
+    if (!isValidPhone) {
         res.send({
-            "redirect_to_blocks": ["camon"]
+            "redirect_to_blocks": ["RETRY_GET_PHONE"]
         });
     } else {
         res.send({
-            "redirect_to_blocks": ["nhaplaisdt"]
+            "set_attributes": {
+                "phone_number": info
+            }
         });
     }
 })
